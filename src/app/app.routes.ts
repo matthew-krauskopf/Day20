@@ -29,8 +29,12 @@ export const routes: Routes = [
       },
       {
         path: 'tracks',
-        component: TracksComponent,
         children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: TracksComponent,
+          },
           {
             path: ':id',
             component: TrackDetailComponent,
@@ -39,8 +43,12 @@ export const routes: Routes = [
       },
       {
         path: 'playlists',
-        component: PlaylistsComponent,
         children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: PlaylistsComponent,
+          },
           {
             path: ':id',
             component: PlaylistDetailComponent,

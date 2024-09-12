@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @tailwind base;
+
+@layer base {
+  html {
+    @apply text-white
+  }
+}
+
 @tailwind components;
 @tailwind utilities;
 
