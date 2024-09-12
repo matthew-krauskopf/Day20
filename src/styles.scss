@@ -10,6 +10,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 @mixin generate-spacing ($upper-limit) {
   @for $i from 1 to $upper-limit {
       .pad-left-#{$i} {
@@ -71,3 +74,5 @@
 }
 
 @include generate-spacing(40);
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
