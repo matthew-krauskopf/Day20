@@ -1,0 +1,21 @@
+@if (item) {
+<div class="pad-y-3 show-on-hover rounded-lg w-full flex flex-row items-center">
+  <div class="margin-right-3">
+    @if (type) {
+    <mat-icon class="text-3xl">
+      @if(type == "track") { music_note } @else if (type == "playlist") {
+      queue_music }
+    </mat-icon>
+    }
+  </div>
+  <div class="flex flex-col">
+    <span>
+      @if(item.title.length > 15) {
+      {{ item.title.slice(0, 15) }}... } @else {
+      {{ item.title }}
+      }
+    </span>
+    <span>{{ type | titlecase }}</span>
+  </div>
+</div>
+}

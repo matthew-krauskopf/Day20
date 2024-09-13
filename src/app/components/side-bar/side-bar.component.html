@@ -1,21 +1,23 @@
 <div class="bg-side h-full rounded-lg pad-x-5 pad-top-5">
-  <div>
-    <span>Your Library</span>
+  <div class="flex items-center margin-y-5">
+    <mat-icon>library_music</mat-icon>
+    <span class="margin-x-5">Your Library</span>
   </div>
   <div class="flex flex-row">
-    <div class="pad-x-5 pad-y-2 rounded-full bg-button">
-      <span>Playlists</span>
-    </div>
-    <div class="margin-x-10 pad-x-5 pad-y-2 rounded-full bg-button">
-      <span>Favorites</span>
-    </div>
-    <div class="pad-x-5 pad-y-2 rounded-full bg-button">
-      <span>All Tracks</span>
-    </div>
+    @for(m of modes; track m) {
+    <app-option-select
+      class="margin-right-4"
+      [label]="m"
+      [mode]="mode"
+      (labelEmitter)="selectMode($event)"
+    ></app-option-select>
+    }
   </div>
   <div class="margin-top-10">
     @for(t of tracks$ | async; track t) {
-    <div>{{ t.title }}</div>
+    <app-side-menu-item [item]="t" [type]="'track'"></app-side-menu-item>
+    } @for(p of playlists$ | async; track p) {
+    <app-side-menu-item [item]="p" [type]="'playlist'"></app-side-menu-item>
     }
   </div>
 </div>

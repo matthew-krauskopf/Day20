@@ -1,6 +1,6 @@
 export interface Playlist {
   id: number;
-  name: string;
+  title: string;
   createdBy: number;
   tracks: number[];
 }

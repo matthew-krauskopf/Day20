@@ -1,0 +1,11 @@
+<div
+  class="h-full cursor-pointer flex flex-1 justify-center items-center"
+  (click)="emitLabel()"
+>
+  <span
+    [ngClass]="mode == label ? 'selected-mode' : 'show-on-hover'"
+    class="pad-x-5 pad-y-2 selected-border bg-button flex rounded-full justify-center items-center"
+  >
+    {{ label | titlecase }}
+  </span>
+</div>

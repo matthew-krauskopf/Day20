@@ -8,6 +8,8 @@ import { provideStore, StoreModule } from '@ngrx/store';
 import { routes } from './app.routes';
 import { TrackEffects } from './features/track/track.effects';
 import { trackReducer } from './features/track/track.state';
+import { playlistReducer } from './features/playlist/playlist.state';
+import { PlaylistEffects } from './features/playlist/playlist.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,10 +17,11 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimationsAsync(),
     provideStore(),
-    provideEffects(TrackEffects),
+    provideEffects(TrackEffects, PlaylistEffects),
     importProvidersFrom(
       StoreModule.forRoot({
         track: trackReducer,
+        playlist: playlistReducer,
       })
     ),
   ],
