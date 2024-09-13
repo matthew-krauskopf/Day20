@@ -1,10 +1,14 @@
 @if (item) {
-<div class="pad-y-3 show-on-hover rounded-lg w-full flex flex-row items-center">
+<div
+  class="cursor-pointer pad-y-3 rounded-lg w-full flex flex-row items-center"
+  [ngClass]="selectedItem == item ? 'selected-mode' : 'show-on-hover'"
+  (click)="selectItem(item)"
+>
   <div class="margin-right-3">
-    @if (type) {
+    @if (item.type) {
     <mat-icon class="text-3xl">
-      @if(type == "track") { music_note } @else if (type == "playlist") {
-      queue_music }
+      @if(item.type == "track") { music_note } @else if (item.type ==
+      "playlist") { queue_music }
     </mat-icon>
     }
   </div>
@@ -15,7 +19,7 @@
       {{ item.title }}
       }
     </span>
-    <span>{{ type | titlecase }}</span>
+    <span class="text-gray">{{ item.type | titlecase }}</span>
   </div>
 </div>
 }

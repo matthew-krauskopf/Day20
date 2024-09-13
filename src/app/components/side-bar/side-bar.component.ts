@@ -2,7 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { combineLatest, map } from 'rxjs';
+import { AuthFacade } from '../../features/auth/auth.facade';
+import { Playlist } from '../../features/playlist/playlist.entity';
 import { PlaylistFacade } from '../../features/playlist/playlist.facade';
+import { Track } from '../../features/track/track.entity';
 import { TrackFacade } from '../../features/track/track.facade';
 import { OptionSelectComponent } from '../option-select/option-select.component';
 import { SideMenuItemComponent } from '../side-menu-item/side-menu-item.component';
@@ -20,27 +24,56 @@ import { SideMenuItemComponent } from '../side-menu-item/side-menu-item.componen
   styleUrl: './side-bar.component.scss',
 })
 export class SideBarComponent {
+  authFacade: AuthFacade = inject(AuthFacade);
   trackFacade: TrackFacade = inject(TrackFacade);
   playlistFacade: PlaylistFacade = inject(PlaylistFacade);
   router: Router = inject(Router);
 
   tracks$;
   playlists$;
-  mode: string | undefined;
+  combinedList$;
+  filteredList$;
+  mode$;
 
+  selectedItem?: Track | Playlist;
+  item?: string;
   modes: string[] = ['Playlists', 'Tracks'];
 
   constructor() {
     this.tracks$ = this.trackFacade.tracks$;
     this.playlists$ = this.playlistFacade.playlists$;
+    this.mode$ = this.authFacade.mode$;
+
+    this.combinedList$ = combineLatest([this.tracks$, this.playlists$]).pipe(
+      map(([tracks, playlists]) => {
+        let combinedList: (Track | Playlist)[] = [];
+        playlists.forEach((p) => combinedList.push(p));
+        tracks.forEach((t) => combinedList.push(t));
+        return combinedList;
+      })
+    );
+
+    this.filteredList$ = combineLatest(this.combinedList$, this.mode$).pipe(
+      map(([list, mode]) =>
+        list.filter(
+          (item) =>
+            mode == '' ||
+            mode.toLowerCase().slice(0, mode.length - 1) == item.type
+        )
+      )
+    );
   }
 
   selectMode($event: string) {
-    if (this.mode == $event) {
-      this.mode = undefined;
-    } else {
-      this.mode = $event;
+    this.authFacade.changeMode($event);
+  }
+
+  selectItem($event: Track | Playlist) {
+    this.selectedItem = $event;
+    if ($event.type == 'track') {
+      this.router.navigate(['dashboard', 'tracks', $event.id]);
+    } else if ($event.type == 'playlist') {
+      this.router.navigate(['dashboard', 'playlists', $event.id]);
     }
-    this.router.navigate(['dashboard', $event.toLowerCase()]);
   }
 }

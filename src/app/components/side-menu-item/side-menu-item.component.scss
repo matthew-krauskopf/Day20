@@ -1,8 +1,12 @@
 div:hover.show-on-hover{
-  background-color: rgba(212, 212, 212, 0.301);
+  background-color: rgba(116, 116, 116, 0.301);
 }
 
 .mat-icon {
   height: 100%;
   width: 100%;
+}
+
+.selected-mode {
+  background-color: rgb(80, 80, 80)
 }

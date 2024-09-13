@@ -6,5 +6,8 @@ export const selectPlaylistState =
 
 export const selectPlaylists = createSelector(
   selectPlaylistState,
-  (playlistState) => playlistState.playlists
+  (playlistState) =>
+    playlistState.playlists.map((p) => {
+      return { ...p, type: 'playlist' };
+    })
 );

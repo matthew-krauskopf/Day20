@@ -10,6 +10,7 @@ import { TrackEffects } from './features/track/track.effects';
 import { trackReducer } from './features/track/track.state';
 import { playlistReducer } from './features/playlist/playlist.state';
 import { PlaylistEffects } from './features/playlist/playlist.effects';
+import { authReducer } from './features/auth/auth.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +23,7 @@ export const appConfig: ApplicationConfig = {
       StoreModule.forRoot({
         track: trackReducer,
         playlist: playlistReducer,
+        auth: authReducer,
       })
     ),
   ],

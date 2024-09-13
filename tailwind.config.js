@@ -11,8 +11,8 @@ module.exports = {
       'side': '#161616',
       'button': '#2a2a2a',
       'night': '#222222',
-      'white': '#ffffff'
-
+      'white': '#ffffff',
+      'gray': '#aeaeae'
     }
   }
 }

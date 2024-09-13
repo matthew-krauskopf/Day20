@@ -3,4 +3,6 @@ export interface Playlist {
   title: string;
   createdBy: number;
   tracks: number[];
+
+  type?: string;
 }

@@ -4,4 +4,6 @@ export interface Track {
   artist: string;
   year: number;
   length: number;
+
+  type?: string;
 }

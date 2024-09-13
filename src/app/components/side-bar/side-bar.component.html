@@ -8,16 +8,19 @@
     <app-option-select
       class="margin-right-4"
       [label]="m"
-      [mode]="mode"
+      [mode]="(mode$ | async) ?? undefined"
       (labelEmitter)="selectMode($event)"
     ></app-option-select>
     }
   </div>
-  <div class="margin-top-10">
-    @for(t of tracks$ | async; track t) {
-    <app-side-menu-item [item]="t" [type]="'track'"></app-side-menu-item>
-    } @for(p of playlists$ | async; track p) {
-    <app-side-menu-item [item]="p" [type]="'playlist'"></app-side-menu-item>
+  <div class="margin-top-10 scroll-pane">
+    @for(t of filteredList$ | async; track t) {
+    <app-side-menu-item
+      [selectedItem]="selectedItem"
+      [item]="t"
+      (emitter)="selectItem($event)"
+    >
+    </app-side-menu-item>
     }
   </div>
 </div>
