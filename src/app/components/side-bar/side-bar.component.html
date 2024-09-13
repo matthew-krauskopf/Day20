@@ -1,0 +1,21 @@
+<div class="bg-side h-full rounded-lg pad-x-5 pad-top-5">
+  <div>
+    <span>Your Library</span>
+  </div>
+  <div class="flex flex-row">
+    <div class="pad-x-5 pad-y-2 rounded-full bg-button">
+      <span>Playlists</span>
+    </div>
+    <div class="margin-x-10 pad-x-5 pad-y-2 rounded-full bg-button">
+      <span>Favorites</span>
+    </div>
+    <div class="pad-x-5 pad-y-2 rounded-full bg-button">
+      <span>All Tracks</span>
+    </div>
+  </div>
+  <div class="margin-top-10">
+    @for(t of tracks$ | async; track t) {
+    <div>{{ t.title }}</div>
+    }
+  </div>
+</div>

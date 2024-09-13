@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseAPIService } from '../base-api.service';
-import { Playlist } from './entity';
+import { Track } from './track.entity';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PlaylistService extends BaseAPIService {
-  endpoint = '/playlists';
+export class TrackService extends BaseAPIService {
+  endpoint = '/tracks';
 
-  getPlaylists(): Observable<Playlist[]> {
+  getTracks(): Observable<Track[]> {
     return this.performGet(this.endpoint);
   }
 }
