@@ -12,7 +12,7 @@ module.exports = {
       'button': '#2a2a2a',
       'night': '#222222',
       'white': '#ffffff',
-      'gray': '#aeaeae'
+      'gray': '#aeaeae',
     }
   }
 }

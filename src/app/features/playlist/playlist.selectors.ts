@@ -11,3 +11,9 @@ export const selectPlaylists = createSelector(
       return { ...p, type: 'playlist' };
     })
 );
+
+export const selectPlaylist = createSelector(
+  selectPlaylistState,
+  (playlistState) =>
+    playlistState.playlists.find((p) => p.id == playlistState.selectedPlaylist)
+);

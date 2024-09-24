@@ -73,7 +73,7 @@ export class SideBarComponent {
     if ($event.type == 'track') {
       this.router.navigate(['dashboard', 'tracks', $event.id]);
     } else if ($event.type == 'playlist') {
-      this.router.navigate(['dashboard', 'playlists', $event.id]);
+      this.playlistFacade.loadPlaylist($event.id);
     }
   }
 }

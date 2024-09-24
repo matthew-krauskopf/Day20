@@ -1,9 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadPlaylistsSuccess } from './playlist.actions';
+import {
+  loadPlaylist,
+  loadPlaylistsSuccess,
+  unloadPlaylist,
+} from './playlist.actions';
 import { Playlist } from './playlist.entity';
 
 export interface PlaylistState {
   playlists: Playlist[];
+  selectedPlaylist?: number;
 }
 
 export const playlistState: PlaylistState = {
@@ -17,5 +22,13 @@ export const playlistReducer = createReducer(
   on(loadPlaylistsSuccess, (state, { playlists }) => ({
     ...state,
     playlists: playlists,
+  })),
+  on(loadPlaylist, (state, { playlistId }) => ({
+    ...state,
+    selectedPlaylist: playlistId,
+  })),
+  on(unloadPlaylist, (state) => ({
+    ...state,
+    selectedPlaylist: undefined,
   }))
 );

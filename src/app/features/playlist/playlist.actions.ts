@@ -9,3 +9,10 @@ export const loadPlaylistsSuccess = createAction(
 );
 
 export const loadPlaylistsFail = createAction('[Side Bar] Load Playlists Fail');
+
+export const loadPlaylist = createAction(
+  '[Main Panel] Load Playlist',
+  props<{ playlistId: number }>()
+);
+
+export const unloadPlaylist = createAction('[Main Panel] Unload Playlist');
