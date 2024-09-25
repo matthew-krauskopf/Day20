@@ -11,6 +11,8 @@ export const login = createAction(
   props<{ username: string; password: string }>()
 );
 
+export const relogin = createAction('[Startup] Relogin');
+
 export const loginSuccessful = createAction(
   '[Login] Login Successful',
   props<{ user: Auth }>()

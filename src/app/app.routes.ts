@@ -6,6 +6,7 @@ import { PlaylistDetailComponent } from './components/playlist-detail/playlist-d
 import { PlaylistsComponent } from './components/playlists/playlists.component';
 import { TrackDetailComponent } from './components/track-detail/track-detail.component';
 import { TracksComponent } from './components/tracks/tracks.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -20,7 +21,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

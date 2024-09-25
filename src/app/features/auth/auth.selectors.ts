@@ -7,3 +7,8 @@ export const selectMode = createSelector(
   selectAuthState,
   (authState) => authState.mode
 );
+
+export const selectAuthUserId = createSelector(
+  selectAuthState,
+  (authState) => authState.id
+);

@@ -3,11 +3,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
+import { StoreType } from '../../model/enum/storeType';
+import { StoreService } from '../../services/store.service';
 import {
   login,
   loginFailed,
   loginRejected,
   loginSuccessful,
+  logout,
+  relogin,
 } from './auth.actions';
 import { AuthService } from './auth.service';
 
@@ -15,6 +19,7 @@ import { AuthService } from './auth.service';
 export class AuthEffects {
   router: Router = inject(Router);
   authService: AuthService = inject(AuthService);
+  localStorage: StoreService = inject(StoreService);
   snackbar: MatSnackBar = inject(MatSnackBar);
 
   constructor(private actions$: Actions) {}
@@ -35,26 +40,52 @@ export class AuthEffects {
     )
   );
 
+  relogin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(relogin),
+      map(() => {
+        const username = this.localStorage.getItem(StoreType.USER);
+        if (username != null) {
+          return login({
+            username: username,
+            password: this.localStorage.getItem(StoreType.PASSWORD) ?? '',
+          });
+        } else {
+          return logout();
+        }
+      })
+    )
+  );
+
   loginSuccessful$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(loginSuccessful),
-        map(() => this.router.navigate(['dashboard']))
+        map((payload) => {
+          this.localStorage.storeItem(StoreType.USER, payload.user.username);
+          this.localStorage.storeItem(
+            StoreType.PASSWORD,
+            String(payload.user.password)
+          );
+          console.log(this.router.url);
+          if (this.router.url.includes('login')) {
+            this.router.navigate(['dashboard', 'tracks']);
+          }
+        })
       ),
     { dispatch: false }
   );
 
-  loginFailed$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(loginFailed),
-        map(() => {
-          this.snackbar.open('Network Error: Please Try Again', 'Dismiss', {
-            duration: 2000,
-          });
-        })
-      ),
-    { dispatch: false }
+  loginFailed$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loginFailed),
+      map(() => {
+        this.snackbar.open('Network Error: Please Try Again', 'Dismiss', {
+          duration: 2000,
+        });
+        return logout();
+      })
+    )
   );
 
   loginRejected$ = createEffect(
@@ -69,6 +100,19 @@ export class AuthEffects {
               duration: 2000,
             }
           );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  logout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(logout),
+        map(() => {
+          this.localStorage.removeItem(StoreType.USER);
+          this.localStorage.removeItem(StoreType.PASSWORD);
+          this.router.navigate(['/login']);
         })
       ),
     { dispatch: false }

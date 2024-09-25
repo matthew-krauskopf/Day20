@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthFacade } from '../../features/auth/auth.facade';
 
 @Component({
   selector: 'app-top-bar',
@@ -10,5 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './top-bar.component.scss',
 })
 export class TopBarComponent {
+  authFacade = inject(AuthFacade);
+
   logo = 'assets/logo.webp';
 }

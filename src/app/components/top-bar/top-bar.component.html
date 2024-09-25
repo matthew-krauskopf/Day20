@@ -6,7 +6,10 @@
     <span class="text-3xl">Not Spotify</span>
   </div>
   <div>
-    <button class="flex justify-center items-center profile-button">
+    <button
+      (click)="authFacade.logout()"
+      class="flex justify-center items-center profile-button"
+    >
       <span>M</span>
     </button>
   </div>
