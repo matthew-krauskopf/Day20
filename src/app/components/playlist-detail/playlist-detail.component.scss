@@ -3,9 +3,18 @@
 }
 
 
-.pic-size {
+.collage {
+  display: flex;
+  flex-wrap: wrap;
   height: 150px;
   width: 150px;
+  background-color: #161616;
+  overflow: hidden;
+}
+
+.collage-pic {
+  height: 75px;
+  width: 75px;
 }
 
 .top-half {
@@ -35,5 +44,4 @@
   width: 40px;
   justify-content: center;
   align-items: center;
-  background-color: white;
 }

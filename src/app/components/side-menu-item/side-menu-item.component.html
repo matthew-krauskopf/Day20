@@ -1,23 +1,23 @@
 @if (item) {
 <div
   class="cursor-pointer pad-y-3 rounded-lg w-full flex flex-row items-center"
-  [ngClass]="selectedItem == item ? 'selected-mode' : 'show-on-hover'"
+  [ngClass]="
+    selectedItem && selectedItem.type == item.type && selectedItem.id == item.id
+      ? 'selected-mode'
+      : 'show-on-hover'
+  "
   (click)="selectItem(item)"
 >
-  <div class="margin-right-3">
-    @if (item.type) {
-    <mat-icon class="text-3xl">
-      @if(item.type == "track") { music_note } @else if (item.type ==
-      "playlist") { queue_music }
-    </mat-icon>
+  <div class="margin-x-3 overflow-hidden">
+    @if (item.type == "playlist") {
+    <mat-icon class="text-3xl track-pic"> queue_music </mat-icon>
+    } @else {
+    <img class="rounded-lg track-pic" src="{{ item.img }}" />
     }
   </div>
   <div class="flex flex-col">
-    <span>
-      @if(item.title.length > 15) {
-      {{ item.title.slice(0, 15) }}... } @else {
+    <span class="flex flex-nowrap">
       {{ item.title }}
-      }
     </span>
     <span class="text-gray">{{ item.type | titlecase }}</span>
   </div>

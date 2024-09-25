@@ -6,4 +6,5 @@ export interface Track {
   length: number;
 
   type?: string;
+  img?: string;
 }

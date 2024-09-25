@@ -5,4 +5,5 @@ export interface Playlist {
   tracks: number[];
 
   type?: string;
+  img?: string;
 }

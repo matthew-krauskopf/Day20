@@ -6,15 +6,18 @@ export const selectTrackState = createFeatureSelector<TrackState>(trackKey);
 
 export const selectTracks = createSelector(selectTrackState, (trackState) =>
   trackState.tracks.map((t) => {
-    return { ...t, type: 'track' };
+    return {
+      ...t,
+      type: 'track',
+      img: 'assets/{}.jpg'.replace('{}', String(t.id)),
+    };
   })
 );
 
 export const selectPlaylistTracks = createSelector(
-  selectTrackState,
+  selectTracks,
   selectPlaylist,
-  (trackState, playlist) =>
-    trackState.tracks.filter((t) => playlist?.tracks.includes(t.id))
+  (tracks, playlist) => tracks.filter((t) => playlist?.tracks.includes(t.id))
 );
 
 export const selectPlaylistLength = createSelector(
