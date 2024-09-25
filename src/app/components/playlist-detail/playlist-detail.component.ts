@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 import { PlaylistFacade } from '../../features/playlist/playlist.facade';
 import { TrackFacade } from '../../features/track/track.facade';
-import { map } from 'rxjs';
+import { TimePipe } from '../../pipes/TimePipe';
 
 @Component({
   selector: 'app-playlist-detail',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, MatTableModule, TimePipe],
   templateUrl: './playlist-detail.component.html',
   styleUrl: './playlist-detail.component.scss',
 })
@@ -23,6 +25,8 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
   playlistTracks$;
   playlistLengthMinutes$;
   playlistLengthSeconds$;
+
+  displayedColumns = ['id', 'title', 'length'];
 
   constructor() {
     this.playlistTracks$ = this.trackFacade.playlistTracks$;

@@ -1,7 +1,7 @@
-<div class="bg-grad h-full rounded-lg pad-x-10 pad-top-5">
+<div class="bg-grad h-full rounded-lg pad-top-5">
   @if(playlistFacade.playlist$| async; as playlist) {
   <div class="h-full flex flex-col overflow-auto">
-    <div class="margin-top-20 w-full flex flex-row top-half">
+    <div class="pad-x-10 margin-top-20 w-full flex flex-row top-half">
       <div class="pic-size">
         <mat-icon class="pic-size bg-side rounded-lg">music_note</mat-icon>
       </div>
@@ -23,7 +23,66 @@
         </div>
       </div>
     </div>
-    <div class="w-full">Playlist Items</div>
+    <div class="pad-x-10 rounded-lg margin-top-10 w-full h-full">
+      <table
+        class="table"
+        mat-table
+        [dataSource]="(trackFacade.playlistTracks$ | async) ?? []"
+      >
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>
+            <span class="text-gray flex justify-start">#</span>
+          </th>
+          <td mat-cell *matCellDef="let track; let i = index">
+            <span class="text-gray flex justify-start">{{ i + 1 }}</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>
+            <span class="flex justify-start">Title</span>
+          </th>
+          <td mat-cell *matCellDef="let track">
+            <div class="flex flex-row justify-start">
+              <div class="icon rounded-lg margin-right-5 margin-y-5">
+                <mat-icon>music_note</mat-icon>
+              </div>
+              <div class="flex flex-col margin-top-3">
+                <span class="text-lg">{{ track.title }}</span>
+                <span class="text-gray">{{ track.artist }}</span>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="length">
+          <th mat-header-cell *matHeaderCellDef>
+            <span class="flex justify-end pad-right-20"
+              ><mat-icon>access_time</mat-icon></span
+            >
+          </th>
+          <td mat-cell *matCellDef="let track">
+            <span class="text-gray flex justify-end pad-right-20">{{
+              track.length | time
+            }}</span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <!--
+      @for(track of trackFacade.playlistTracks$ | async; track $index) {
+      <div class="flex flex-row items-center">
+        <span>{{ $index + 1 }}</span>
+        <mat-icon>music_note</mat-icon>
+        <div class="flex flex-col">
+          <span>{{ track.title }}</span>
+          <span>{{ track.artist }}</span>
+        </div>
+        <span>{{ track.length }}</span>
+      </div>
+      }
+      -->
+    </div>
   </div>
   }
 </div>

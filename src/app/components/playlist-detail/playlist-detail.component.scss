@@ -11,3 +11,29 @@
 .top-half {
   max-height: 240px;
 }
+
+.table {
+  width: 100%;
+  color:gray;
+  background-color: transparent;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  color: white;
+  border-top: 0px;
+  border-bottom: 0px;
+}
+
+.mat-mdc-header-cell {
+  color: gray;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.342);
+  height: 10px;
+}
+
+.icon {
+  height: 40px;
+  width: 40px;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
