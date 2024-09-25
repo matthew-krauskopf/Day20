@@ -6,11 +6,12 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideEffects } from '@ngrx/effects';
 import { provideStore, StoreModule } from '@ngrx/store';
 import { routes } from './app.routes';
+import { AuthEffects } from './features/auth/auth.effects';
+import { authReducer } from './features/auth/auth.state';
+import { PlaylistEffects } from './features/playlist/playlist.effects';
+import { playlistReducer } from './features/playlist/playlist.state';
 import { TrackEffects } from './features/track/track.effects';
 import { trackReducer } from './features/track/track.state';
-import { playlistReducer } from './features/playlist/playlist.state';
-import { PlaylistEffects } from './features/playlist/playlist.effects';
-import { authReducer } from './features/auth/auth.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimationsAsync(),
     provideStore(),
-    provideEffects(TrackEffects, PlaylistEffects),
+    provideEffects(AuthEffects, TrackEffects, PlaylistEffects),
     importProvidersFrom(
       StoreModule.forRoot({
         track: trackReducer,

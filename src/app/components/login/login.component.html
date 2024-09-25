@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div class="flex items-center justify-center w-full h-full">
+  <div class="card-size bg-white rounded-lg pad-x-7 pad-y-5">
+    <div class="flex justify-center">
+      <span class="text-black font-bold text-2xl">Login</span>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="w-full margin-y-7">
+        <mat-form-field class="w-full">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" />
+          <mat-error *ngIf="loginForm.controls['username'].errors as userError">
+            <span *ngIf="userError['required']">Username is required</span>
+            <span *ngIf="userError['pattern']">
+              Username must be 5+ letters or numbers
+            </span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label> Password </mat-label>
+          <input type="password" matInput formControlName="password" />
+          <mat-error *ngIf="loginForm.controls['password'].errors as userError">
+            <span *ngIf="userError['required']">Password is required</span>
+            <span *ngIf="userError['pattern']">
+              Password must be 5+ letters or numbers
+            </span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <button
+          [disabled]="!loginForm.valid"
+          type="submit"
+          class="w-full"
+          mat-flat-button
+        >
+          <span class="text-white">Submit</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

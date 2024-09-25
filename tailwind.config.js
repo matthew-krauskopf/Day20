@@ -13,6 +13,7 @@ module.exports = {
       'night': '#222222',
       'white': '#ffffff',
       'gray': '#aeaeae',
+      'black': '#000000',
     }
   }
 }

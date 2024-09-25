@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { changeMode, login } from './auth.actions';
 import { selectMode } from './auth.selectors';
-import { changeMode } from './auth.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -15,5 +15,10 @@ export class AuthFacade {
 
   changeMode(mode: string) {
     this.store.dispatch(changeMode({ mode }));
+  }
+
+  login(username: string, password: string) {
+    console.log(username, password);
+    this.store.dispatch(login({ username, password }));
   }
 }

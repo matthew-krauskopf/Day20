@@ -1,16 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
 import { Permission } from '../../model/enum/permission';
-import { changeMode } from './auth.actions';
+import { changeMode, loginSuccessful } from './auth.actions';
 
 export interface AuthState {
   mode: string;
-  userId: number;
+  id: number;
   permission: Permission;
 }
 
 export const authState: AuthState = {
   mode: '',
-  userId: -1,
+  id: -1,
   permission: Permission.NONE,
 };
 
@@ -21,5 +21,10 @@ export const authReducer = createReducer(
   on(changeMode, (state, { mode }) => ({
     ...state,
     mode: state.mode == mode ? '' : mode,
+  })),
+  on(loginSuccessful, (state, { user }) => ({
+    ...state,
+    id: user.id,
+    permission: user.permission,
   }))
 );
