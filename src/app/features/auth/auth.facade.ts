@@ -24,7 +24,6 @@ export class AuthFacade {
   }
 
   login(username: string, password: string) {
-    console.log(username, password);
     this.store.dispatch(login({ username, password }));
   }
 

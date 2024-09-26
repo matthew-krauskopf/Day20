@@ -10,10 +10,12 @@ import {
 } from './playlist.actions';
 import { Playlist } from './playlist.entity';
 import { PlaylistService } from './playlist.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class PlaylistEffects {
   router: Router = inject(Router);
+  snackbar: MatSnackBar = inject(MatSnackBar);
   playlistsService: PlaylistService = inject(PlaylistService);
 
   constructor(private actions$: Actions) {}
@@ -39,6 +41,23 @@ export class PlaylistEffects {
         tap((payload) => {
           this.router.navigate(['dashboard', 'playlists', payload.playlistId]);
         })
+      ),
+    { dispatch: false }
+  );
+
+  loadPlaylistsFailed$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(loadPlaylistsFail),
+        map(() =>
+          this.snackbar.open(
+            'Network Error: Playlists failed to load',
+            'Dismiss',
+            {
+              duration: 5000,
+            }
+          )
+        )
       ),
     { dispatch: false }
   );

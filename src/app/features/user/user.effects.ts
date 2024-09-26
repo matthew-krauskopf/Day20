@@ -1,4 +1,5 @@
 import { Injectable, inject } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
 import { loginSuccessful } from '../auth/auth.actions';
@@ -9,6 +10,7 @@ import { UserService } from './user.service';
 @Injectable()
 export class UserEffects {
   usersService: UserService = inject(UserService);
+  snackbar: MatSnackBar = inject(MatSnackBar);
 
   constructor(private actions$: Actions) {}
 
@@ -22,5 +24,18 @@ export class UserEffects {
         )
       )
     )
+  );
+
+  loadUsersFailed$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(loadUsersFail),
+        map(() =>
+          this.snackbar.open('Network Error: Users failed to load', 'Dismiss', {
+            duration: 5000,
+          })
+        )
+      ),
+    { dispatch: false }
   );
 }

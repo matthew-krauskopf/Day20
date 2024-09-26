@@ -1,4 +1,5 @@
 import { inject, Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
 import { loadTracks, loadTracksFail, loadTracksSuccess } from './track.actions';
@@ -8,6 +9,7 @@ import { TrackService } from './track.service';
 @Injectable()
 export class TrackEffects {
   tracksService: TrackService = inject(TrackService);
+  snackbar: MatSnackBar = inject(MatSnackBar);
 
   constructor(private actions$: Actions) {}
 
@@ -21,5 +23,22 @@ export class TrackEffects {
         )
       )
     )
+  );
+
+  loadTracksFailed$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(loadTracksFail),
+        map(() =>
+          this.snackbar.open(
+            'Network Error: Tracks failed to load',
+            'Dismiss',
+            {
+              duration: 5000,
+            }
+          )
+        )
+      ),
+    { dispatch: false }
   );
 }

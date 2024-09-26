@@ -30,7 +30,6 @@ export class PlaylistFacade {
   }
 
   loadPlaylist(id: number) {
-    console.log('Firing ' + id);
     this.store.dispatch(loadPlaylist({ playlistId: id }));
   }
 

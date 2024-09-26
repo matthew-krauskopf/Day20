@@ -67,7 +67,6 @@ export class AuthEffects {
             StoreType.PASSWORD,
             String(payload.user.password)
           );
-          console.log(this.router.url);
           if (this.router.url.includes('login')) {
             this.router.navigate(['dashboard', 'tracks']);
           }
@@ -81,7 +80,7 @@ export class AuthEffects {
       ofType(loginFailed),
       map(() => {
         this.snackbar.open('Network Error: Please Try Again', 'Dismiss', {
-          duration: 2000,
+          duration: 5000,
         });
         return logout();
       })

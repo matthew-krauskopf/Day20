@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,8 +27,7 @@ export abstract class BaseAPIService {
     params.forEach((p) => {
       options = options.append(p.key, p.value);
     });
-    return this.http
-      .get<T[]>(this.baseUrl + endpoint, { params: options })
-      .pipe(catchError(this.handleError<T[]>()));
+    return this.http.get<T[]>(this.baseUrl + endpoint, { params: options });
+    //.pipe(catchError(this.handleError<T[]>()));
   }
 }
