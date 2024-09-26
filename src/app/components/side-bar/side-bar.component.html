@@ -16,7 +16,7 @@
   <div class="margin-top-10 scroll-pane">
     @for(t of filteredList$ | async; track t) {
     <app-side-menu-item
-      [selectedItem]="selectedItem"
+      [selectedItem]="(selectedItem$ | async) ?? undefined"
       [item]="t"
       (emitter)="selectItem($event)"
     >

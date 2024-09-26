@@ -1,9 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadTracksSuccess } from './track.actions';
+import { loadTrack, loadTracksSuccess, unloadTrack } from './track.actions';
 import { Track } from './track.entity';
 
 export interface TrackState {
   tracks: Track[];
+  selectedTrack?: number;
 }
 
 export const trackState: TrackState = {
@@ -17,5 +18,13 @@ export const trackReducer = createReducer(
   on(loadTracksSuccess, (state, { tracks }) => ({
     ...state,
     tracks: tracks,
+  })),
+  on(loadTrack, (state, { id }) => ({
+    ...state,
+    selectedTrack: id,
+  })),
+  on(unloadTrack, (state) => ({
+    ...state,
+    selectedTrack: undefined,
   }))
 );

@@ -34,8 +34,8 @@ export class SideBarComponent {
   combinedList$;
   filteredList$;
   mode$;
+  selectedItem$;
 
-  selectedItem?: Track | Playlist;
   item?: string;
   modes: string[] = ['Playlists', 'Tracks'];
 
@@ -43,6 +43,7 @@ export class SideBarComponent {
     this.tracks$ = this.trackFacade.tracks$;
     this.playlists$ = this.playlistFacade.playlists$;
     this.mode$ = this.authFacade.mode$;
+    this.selectedItem$ = this.authFacade.selectedItem$;
 
     this.combinedList$ = combineLatest([this.tracks$, this.playlists$]).pipe(
       map(([tracks, playlists]) => {
@@ -69,9 +70,8 @@ export class SideBarComponent {
   }
 
   selectItem($event: Track | Playlist) {
-    this.selectedItem = $event;
     if ($event.type == 'track') {
-      this.router.navigate(['dashboard', 'tracks', $event.id]);
+      this.trackFacade.loadTrack($event.id);
     } else if ($event.type == 'playlist') {
       this.playlistFacade.loadPlaylist($event.id);
     }

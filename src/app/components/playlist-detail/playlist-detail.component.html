@@ -49,7 +49,7 @@
                 <img class="rounded-md" src="{{ track.img }}" />
               </div>
               <div class="flex flex-col margin-top-3">
-                <span class="text-lg">{{ track.title }}</span>
+                <span class="title-width text-lg">{{ track.title }}</span>
                 <span class="text-gray">{{ track.artist }}</span>
               </div>
             </div>
@@ -85,7 +85,12 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr
+          class="show-on-hover cursor-pointer"
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="trackFacade.loadTrack(row.id)"
+        ></tr>
       </table>
     </div>
   </div>

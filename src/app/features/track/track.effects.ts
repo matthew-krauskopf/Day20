@@ -1,13 +1,20 @@
 import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of } from 'rxjs';
-import { loadTracks, loadTracksFail, loadTracksSuccess } from './track.actions';
+import { catchError, exhaustMap, map, of, tap } from 'rxjs';
+import {
+  loadTrack,
+  loadTracks,
+  loadTracksFail,
+  loadTracksSuccess,
+} from './track.actions';
 import { Track } from './track.entity';
 import { TrackService } from './track.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TrackEffects {
+  router: Router = inject(Router);
   tracksService: TrackService = inject(TrackService);
   snackbar: MatSnackBar = inject(MatSnackBar);
 
@@ -38,6 +45,17 @@ export class TrackEffects {
             }
           )
         )
+      ),
+    { dispatch: false }
+  );
+
+  loadTrack$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(loadTrack),
+        tap((payload) => {
+          this.router.navigate(['dashboard', 'tracks', payload.id]);
+        })
       ),
     { dispatch: false }
   );

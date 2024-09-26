@@ -9,3 +9,10 @@ export const loadTracksSuccess = createAction(
 );
 
 export const loadTracksFail = createAction('[Side Bar] Load Tracks Fail');
+
+export const loadTrack = createAction(
+  '[Tracks] Load Track',
+  props<{ id: number }>()
+);
+
+export const unloadTrack = createAction('[Tracks] Unload Track');

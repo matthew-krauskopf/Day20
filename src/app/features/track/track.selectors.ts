@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { trackKey, TrackState } from './track.state';
+import { trackKey, trackState, TrackState } from './track.state';
 import { selectPlaylist } from '../playlist/playlist.selectors';
 
 export const selectTrackState = createFeatureSelector<TrackState>(trackKey);
@@ -12,6 +12,12 @@ export const selectTracks = createSelector(selectTrackState, (trackState) =>
       img: 'assets/{}.jpg'.replace('{}', String(t.id)),
     };
   })
+);
+
+export const selectedTrack = createSelector(
+  selectTrackState,
+  selectTracks,
+  (state, tracks) => tracks.find((t) => t.id === state.selectedTrack)
 );
 
 export const selectPlaylistTracks = createSelector(

@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { playlistKey, PlaylistState } from './playlist.state';
 import { selectUsers } from '../user/user.selectors';
+import { playlistKey, PlaylistState } from './playlist.state';
 
 export const selectPlaylistState =
   createFeatureSelector<PlaylistState>(playlistKey);
@@ -15,8 +15,8 @@ export const selectPlaylists = createSelector(
 
 export const selectPlaylist = createSelector(
   selectPlaylistState,
-  (playlistState) =>
-    playlistState.playlists.find((p) => p.id == playlistState.selectedPlaylist)
+  selectPlaylists,
+  (state, playlists) => playlists.find((p) => p.id == state.selectedPlaylist)
 );
 
 export const selectPlaylistAuthor = createSelector(

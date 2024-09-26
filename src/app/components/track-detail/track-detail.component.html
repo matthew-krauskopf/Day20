@@ -1,1 +1,5 @@
-<p>track-detail works!</p>
+@if(trackFacade.selectedTrack$ | async; as track) {
+<div>
+  <span>{{ track.title }}</span>
+</div>
+}
