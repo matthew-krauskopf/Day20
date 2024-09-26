@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import {
   loadPlaylist,
   loadPlaylists,
+  openEditPlaylistModal,
+  removeFromPlaylist,
   unloadPlaylist,
 } from './playlist.actions';
 import {
@@ -10,6 +12,7 @@ import {
   selectPlaylistAuthor,
   selectPlaylists,
 } from './playlist.selectors';
+import { Playlist } from './playlist.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +38,13 @@ export class PlaylistFacade {
 
   unloadPlaylist() {
     this.store.dispatch(unloadPlaylist());
+  }
+
+  removeFromPlaylist(trackId: number) {
+    this.store.dispatch(removeFromPlaylist({ id: trackId }));
+  }
+
+  editPlaylistDetails(playlist: Playlist) {
+    this.store.dispatch(openEditPlaylistModal({ playlist: playlist }));
   }
 }

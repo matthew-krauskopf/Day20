@@ -19,8 +19,6 @@ export const selectedItem = createSelector(
   selectedTrack,
   selectPlaylist,
   (track, playlist) => {
-    console.log(track);
-    console.log(playlist);
     return track ? track : playlist;
   }
 );

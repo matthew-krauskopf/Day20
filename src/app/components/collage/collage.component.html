@@ -1,5 +1,10 @@
 <div class="collage rounded-lg">
-  @if (trackIds) { @for(track of trackIds.slice(0,4); track $index) {
-  <img class="collage-pic" src="assets/{{ track }}.jpg" />
-  } }
+  @if (trackIds) { @if (trackIds.length >= 4) { @for(track of
+  trackIds.slice(0,4); track $index) {
+  <img class="collage-pic" src="assets/{{ track }}.jpg " />
+  } } @else { @if (trackIds.length > 0) {
+  <img src="assets/{{ trackIds[0] }}.jpg " />
+  } @else {
+  <img src="assets/new.png" />
+  } } }
 </div>

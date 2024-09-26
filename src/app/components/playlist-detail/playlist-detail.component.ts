@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
@@ -8,6 +8,7 @@ import { PlaylistFacade } from '../../features/playlist/playlist.facade';
 import { TrackFacade } from '../../features/track/track.facade';
 import { TimePipe } from '../../pipes/TimePipe';
 import { CollageComponent } from '../collage/collage.component';
+import { Playlist } from '../../features/playlist/playlist.entity';
 
 @Component({
   selector: 'app-playlist-detail',
@@ -18,6 +19,7 @@ import { CollageComponent } from '../collage/collage.component';
     MatTableModule,
     TimePipe,
     CollageComponent,
+    NgClass,
   ],
   templateUrl: './playlist-detail.component.html',
   styleUrl: './playlist-detail.component.scss',
@@ -32,7 +34,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
   playlistLengthMinutes$;
   playlistLengthSeconds$;
 
-  displayedColumns = ['id', 'title', 'album', 'year', 'length'];
+  displayedColumns = ['id', 'title', 'album', 'year', 'length', 'd'];
 
   constructor() {
     this.playlistTracks$ = this.trackFacade.playlistTracks$;
@@ -50,5 +52,14 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.playlistFacade.unloadPlaylist();
+  }
+
+  removeFromPlaylist($event: Event, trackId: number) {
+    $event.stopPropagation();
+    this.playlistFacade.removeFromPlaylist(trackId);
+  }
+
+  editPlaylistDetails(playlist: Playlist) {
+    this.playlistFacade.editPlaylistDetails(playlist);
   }
 }

@@ -1,20 +1,27 @@
 import { inject, Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of, tap } from 'rxjs';
+import { catchError, exhaustMap, filter, map, of, tap } from 'rxjs';
+import { EditPlaylistComponent } from '../../components/edit-playlist/edit-playlist.component';
 import {
   loadPlaylist,
   loadPlaylists,
   loadPlaylistsFail,
   loadPlaylistsSuccess,
+  openEditPlaylistModal,
+  removeFromPlaylist,
+  updatePlaylist,
 } from './playlist.actions';
 import { Playlist } from './playlist.entity';
 import { PlaylistService } from './playlist.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class PlaylistEffects {
   router: Router = inject(Router);
+  dialog: MatDialog = inject(MatDialog);
   snackbar: MatSnackBar = inject(MatSnackBar);
   playlistsService: PlaylistService = inject(PlaylistService);
 
@@ -61,4 +68,49 @@ export class PlaylistEffects {
       ),
     { dispatch: false }
   );
+
+  removeTrackFromPlaylist$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(removeFromPlaylist),
+        map(() =>
+          this.snackbar.open('Track removed from playlist', 'Dismiss', {
+            duration: 3000,
+          })
+        )
+      ),
+    { dispatch: false }
+  );
+
+  openEditPlaylistModal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(openEditPlaylistModal),
+      exhaustMap((payload) =>
+        this.dialog
+          .open(EditPlaylistComponent, {
+            data: {
+              playlist: payload.playlist,
+            },
+          })
+          .afterClosed()
+          .pipe(
+            filter((form) => !!form),
+            map((form: FormGroup) => {
+              //console.log(form);
+              return updatePlaylist({
+                title: form.value.title,
+                description: form.value.description,
+              });
+            })
+          )
+      )
+    )
+  );
+
+  //updatePlaylist$ = createEffect(() =>
+  //  this.actions$.pipe(
+  //    ofType(updatePlaylist),
+  //    tap((payload) => console.log(payload))
+  //  )
+  //);
 }
