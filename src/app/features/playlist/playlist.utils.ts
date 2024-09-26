@@ -52,3 +52,13 @@ export function markPlaylistDeleted(
     },
   ];
 }
+
+export function createNewPlaylist(playlists: Playlist[], userId: number) {
+  return {
+    id:
+      playlists.map((p) => p.id).reduce((max, a) => (max > a ? max : a), 0) + 1,
+    title: 'New Playlist',
+    createdBy: userId,
+    tracks: [],
+  };
+}

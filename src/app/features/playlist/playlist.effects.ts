@@ -5,8 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, filter, map, of, tap } from 'rxjs';
-import { EditPlaylistComponent } from '../../components/edit-playlist/edit-playlist.component';
 import {
+  addPlaylist,
   deletePlaylist,
   loadPlaylist,
   loadPlaylists,
@@ -18,6 +18,7 @@ import {
 } from './playlist.actions';
 import { Playlist } from './playlist.entity';
 import { PlaylistService } from './playlist.service';
+import { EditPlaylistComponent } from '../../components/edit-playlist/edit-playlist.component';
 
 @Injectable()
 export class PlaylistEffects {
@@ -97,6 +98,20 @@ export class PlaylistEffects {
     { dispatch: false }
   );
 
+  addPlaylist$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(addPlaylist),
+        map(() => {
+          this.snackbar.open('Playlist successfully created', 'Dismiss', {
+            duration: 3000,
+          });
+          //this.router.navigate(['/dashboard', 'playlists']);
+        })
+      ),
+    { dispatch: false }
+  );
+
   openEditPlaylistModal$ = createEffect(() =>
     this.actions$.pipe(
       ofType(openEditPlaylistModal),
@@ -111,7 +126,6 @@ export class PlaylistEffects {
           .pipe(
             filter((form) => !!form),
             map((form: FormGroup) => {
-              //console.log(form);
               return updatePlaylist({
                 title: form.value.title,
                 description: form.value.description,

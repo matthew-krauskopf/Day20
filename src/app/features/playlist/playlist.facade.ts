@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
+  addPlaylist,
   deletePlaylist,
   loadPlaylist,
   loadPlaylists,
@@ -51,5 +52,9 @@ export class PlaylistFacade {
 
   deletePlaylist() {
     this.store.dispatch(deletePlaylist());
+  }
+
+  addPlaylist(userId: number) {
+    this.store.dispatch(addPlaylist({ userId }));
   }
 }

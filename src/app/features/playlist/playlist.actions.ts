@@ -34,3 +34,8 @@ export const updatePlaylist = createAction(
 );
 
 export const deletePlaylist = createAction('[Delete Playlist] Delete Playlist');
+
+export const addPlaylist = createAction(
+  '[Add Playlist] Add Playlist',
+  props<{ userId: number }>()
+);

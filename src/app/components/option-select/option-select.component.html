@@ -1,5 +1,6 @@
+@if(mode == '' || mode == label ) {
 <div
-  class="h-full cursor-pointer flex flex-1 justify-center items-center"
+  class="margin-right-4 h-full cursor-pointer flex flex-1 justify-center items-center"
   (click)="emitLabel()"
 >
   <span
@@ -9,3 +10,4 @@
     {{ label | titlecase }}
   </span>
 </div>
+}
