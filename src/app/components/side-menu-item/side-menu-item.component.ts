@@ -5,11 +5,12 @@ import { Playlist } from '../../features/playlist/playlist.entity';
 import { Track } from '../../features/track/track.entity';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
+import { CollageComponent } from '../collage/collage.component';
 
 @Component({
   selector: 'app-side-menu-item',
   standalone: true,
-  imports: [MatIconModule, CommonModule],
+  imports: [MatIconModule, CommonModule, CollageComponent],
   templateUrl: './side-menu-item.component.html',
   styleUrl: './side-menu-item.component.scss',
 })

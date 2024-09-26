@@ -2,19 +2,9 @@
   background-image: linear-gradient(rgb(16, 112, 16),#161616, #161616);
 }
 
-
 .collage {
-  display: flex;
-  flex-wrap: wrap;
   height: 150px;
   width: 150px;
-  background-color: #161616;
-  overflow: hidden;
-}
-
-.collage-pic {
-  height: 75px;
-  width: 75px;
 }
 
 .top-half {

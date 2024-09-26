@@ -7,11 +7,18 @@ import { map } from 'rxjs';
 import { PlaylistFacade } from '../../features/playlist/playlist.facade';
 import { TrackFacade } from '../../features/track/track.facade';
 import { TimePipe } from '../../pipes/TimePipe';
+import { CollageComponent } from '../collage/collage.component';
 
 @Component({
   selector: 'app-playlist-detail',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatTableModule, TimePipe],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatTableModule,
+    TimePipe,
+    CollageComponent,
+  ],
   templateUrl: './playlist-detail.component.html',
   styleUrl: './playlist-detail.component.scss',
 })
@@ -26,7 +33,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
   playlistLengthMinutes$;
   playlistLengthSeconds$;
 
-  displayedColumns = ['id', 'title', 'length'];
+  displayedColumns = ['id', 'title', 'album', 'year', 'length'];
 
   constructor() {
     this.playlistTracks$ = this.trackFacade.playlistTracks$;

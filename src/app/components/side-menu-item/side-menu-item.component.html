@@ -8,14 +8,14 @@
   "
   (click)="selectItem(item)"
 >
-  <div class="margin-x-3 overflow-hidden">
+  <div class="margin-x-3 overflow-hidden track-pic">
     @if (item.type == "playlist") {
-    <mat-icon class="text-3xl track-pic"> queue_music </mat-icon>
+    <app-collage [trackIds]="item.tracks"></app-collage>
     } @else {
-    <img class="rounded-lg track-pic" src="{{ item.img }}" />
+    <img class="rounded-lg" src="{{ item.img }}" />
     }
   </div>
-  <div class="flex flex-col">
+  <div class="margin-x-3 flex flex-col">
     <span class="flex flex-nowrap">
       {{ item.title }}
     </span>

@@ -1,0 +1,5 @@
+<div class="collage rounded-lg">
+  @if (trackIds) { @for(track of trackIds.slice(0,4); track $index) {
+  <img class="collage-pic" src="assets/{{ track }}.jpg" />
+  } }
+</div>

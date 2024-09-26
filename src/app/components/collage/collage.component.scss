@@ -1,0 +1,11 @@
+.collage {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #161616;
+  overflow: hidden;
+}
+
+.collage-pic {
+  height: 50%;
+  width: 50%;
+}
