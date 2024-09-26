@@ -12,6 +12,8 @@ import { PlaylistEffects } from './features/playlist/playlist.effects';
 import { playlistReducer } from './features/playlist/playlist.state';
 import { TrackEffects } from './features/track/track.effects';
 import { trackReducer } from './features/track/track.state';
+import { userReducer } from './features/user/user.state';
+import { UserEffects } from './features/user/user.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,12 +21,13 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimationsAsync(),
     provideStore(),
-    provideEffects(AuthEffects, TrackEffects, PlaylistEffects),
+    provideEffects(AuthEffects, TrackEffects, PlaylistEffects, UserEffects),
     importProvidersFrom(
       StoreModule.forRoot({
         track: trackReducer,
         playlist: playlistReducer,
         auth: authReducer,
+        user: userReducer,
       })
     ),
   ],

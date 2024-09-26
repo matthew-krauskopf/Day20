@@ -5,7 +5,11 @@ import {
   loadPlaylists,
   unloadPlaylist,
 } from './playlist.actions';
-import { selectPlaylist, selectPlaylists } from './playlist.selectors';
+import {
+  selectPlaylist,
+  selectPlaylistAuthor,
+  selectPlaylists,
+} from './playlist.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +17,12 @@ import { selectPlaylist, selectPlaylists } from './playlist.selectors';
 export class PlaylistFacade {
   playlists$;
   playlist$;
+  playlistAuthor$;
 
   constructor(private store: Store) {
     this.playlists$ = this.store.select(selectPlaylists);
     this.playlist$ = this.store.select(selectPlaylist);
+    this.playlistAuthor$ = this.store.select(selectPlaylistAuthor);
   }
 
   loadPlaylists() {

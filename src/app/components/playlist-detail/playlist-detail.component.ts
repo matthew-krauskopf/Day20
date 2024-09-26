@@ -27,7 +27,6 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
 
   trackFacade: TrackFacade = inject(TrackFacade);
   playlistFacade: PlaylistFacade = inject(PlaylistFacade);
-  //userFacade : UserFacade = inject(UserFacade);
 
   playlistTracks$;
   playlistLengthMinutes$;

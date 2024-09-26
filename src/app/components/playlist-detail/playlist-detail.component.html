@@ -13,7 +13,9 @@
           <span class="text-3xl">{{ playlist.title }}</span>
         </div>
         <div>
-          <span class="">{{ playlist.createdBy }}</span>
+          <span class="">{{
+            (playlistFacade.playlistAuthor$ | async)?.username
+          }}</span>
           <span class="margin-x-3 text-gray">•</span>
           <span class="text-gray">{{ playlist.tracks.length }} songs,</span>
           <span class="text-gray margin-x-3"
