@@ -1,7 +1,18 @@
-<div class="bg-grad h-full rounded-lg pad-top-5">
+<div class="bg-grad h-full rounded-lg pad-top-10">
   @if(playlistFacade.playlist$| async; as playlist) {
-  <div class="h-full flex flex-col overflow-auto">
-    <div class="pad-x-10 margin-top-20 w-full flex flex-row top-half">
+  <div class="pad-x-10 h-full flex flex-col overflow-auto">
+    <div class="w-full flex justify-end">
+      <button
+        (click)="playlistFacade.deletePlaylist()"
+        class="delete"
+        mat-icon-button
+      >
+        <mat-icon class="items-center justify-center delete">
+          delete_outline
+        </mat-icon>
+      </button>
+    </div>
+    <div class="w-full flex flex-row top-half">
       <div class="collage rounded-lg">
         <app-collage [trackIds]="playlist.tracks"></app-collage>
       </div>
@@ -32,7 +43,7 @@
         </div>
       </div>
     </div>
-    <div class="pad-x-10 rounded-lg margin-top-10 w-full h-full">
+    <div class="rounded-lg margin-top-10 w-full h-full">
       <table
         class="table"
         mat-table

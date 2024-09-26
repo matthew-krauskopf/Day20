@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
+  deletePlaylist,
   loadPlaylist,
   loadPlaylists,
   openEditPlaylistModal,
@@ -46,5 +47,9 @@ export class PlaylistFacade {
 
   editPlaylistDetails(playlist: Playlist) {
     this.store.dispatch(openEditPlaylistModal({ playlist: playlist }));
+  }
+
+  deletePlaylist() {
+    this.store.dispatch(deletePlaylist());
   }
 }

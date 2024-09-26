@@ -36,3 +36,19 @@ export function updatePlaylistDetails(
     },
   ];
 }
+
+export function markPlaylistDeleted(
+  playlists: Playlist[],
+  selectedPlaylist: number | undefined
+) {
+  const toEditPlaylist = playlists.find((p) => p.id == selectedPlaylist);
+  if (!toEditPlaylist) return playlists;
+
+  return [
+    ...playlists.filter((p) => p.id != selectedPlaylist),
+    {
+      ...toEditPlaylist,
+      deleted: true,
+    },
+  ];
+}

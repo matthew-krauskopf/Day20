@@ -8,9 +8,11 @@ export const selectPlaylistState =
 export const selectPlaylists = createSelector(
   selectPlaylistState,
   (playlistState) =>
-    playlistState.playlists.map((p) => {
-      return { ...p, type: 'playlist' };
-    })
+    playlistState.playlists
+      .filter((p) => p.deleted != true)
+      .map((p) => {
+        return { ...p, type: 'playlist' };
+      })
 );
 
 export const selectPlaylist = createSelector(

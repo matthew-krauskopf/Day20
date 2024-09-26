@@ -7,6 +7,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, filter, map, of, tap } from 'rxjs';
 import { EditPlaylistComponent } from '../../components/edit-playlist/edit-playlist.component';
 import {
+  deletePlaylist,
   loadPlaylist,
   loadPlaylists,
   loadPlaylistsFail,
@@ -82,6 +83,20 @@ export class PlaylistEffects {
     { dispatch: false }
   );
 
+  deletePlaylist$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(deletePlaylist),
+        map(() => {
+          this.snackbar.open('Playlist successfully deleted', 'Dismiss', {
+            duration: 3000,
+          });
+          this.router.navigate(['/dashboard']);
+        })
+      ),
+    { dispatch: false }
+  );
+
   openEditPlaylistModal$ = createEffect(() =>
     this.actions$.pipe(
       ofType(openEditPlaylistModal),
@@ -106,11 +121,4 @@ export class PlaylistEffects {
       )
     )
   );
-
-  //updatePlaylist$ = createEffect(() =>
-  //  this.actions$.pipe(
-  //    ofType(updatePlaylist),
-  //    tap((payload) => console.log(payload))
-  //  )
-  //);
 }

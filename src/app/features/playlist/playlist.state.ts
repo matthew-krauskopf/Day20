@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
+  deletePlaylist,
   loadPlaylist,
   loadPlaylistsSuccess,
   removeFromPlaylist,
@@ -8,6 +9,7 @@ import {
 } from './playlist.actions';
 import { Playlist } from './playlist.entity';
 import {
+  markPlaylistDeleted,
   removeTrackFromPlaylist,
   updatePlaylistDetails,
 } from './playlist.utils';
@@ -53,5 +55,9 @@ export const playlistReducer = createReducer(
       title,
       description
     ),
+  })),
+  on(deletePlaylist, (state) => ({
+    ...state,
+    playlists: markPlaylistDeleted(state.playlists, state.selectedPlaylist),
   }))
 );

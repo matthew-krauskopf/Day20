@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { loadUsersSuccess, unloadUsers } from './user.actions';
 import { User } from './user.entity';
 import { logout } from '../auth/auth.actions';
+import { deletePlaylist } from '../playlist/playlist.actions';
 
 export interface UserState {
   users: User[];

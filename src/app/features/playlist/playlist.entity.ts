@@ -8,4 +8,5 @@ export interface Playlist {
   type?: string;
   img?: string;
   showDelete?: boolean;
+  deleted?: boolean;
 }

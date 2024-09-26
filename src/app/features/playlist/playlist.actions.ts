@@ -32,3 +32,5 @@ export const updatePlaylist = createAction(
   '[Edit Playlist] Save Playlist Changes',
   props<{ title: string; description: string }>()
 );
+
+export const deletePlaylist = createAction('[Delete Playlist] Delete Playlist');
