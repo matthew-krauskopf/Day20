@@ -1,6 +1,9 @@
 .scroll-pane {
   max-height: 85%;
   overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 span:hover.show-on-hover{
