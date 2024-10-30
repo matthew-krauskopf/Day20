@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import { Playlist } from './playlist.entity';
-import { FormGroup } from '@angular/forms';
 
 export const loadPlaylists = createAction('[Side Bar] Load Playlists');
 
