@@ -35,7 +35,9 @@
             (playlistFacade.playlistAuthor$ | async)?.username
           }}</span>
           <span class="margin-x-3 text-gray">•</span>
-          <span class="text-gray">{{ playlist.tracks.length }} songs,</span>
+          <span class="text-gray"
+            >{{ trackFacade.playlistNumTracks$ | async }} songs,</span
+          >
           <span class="text-gray margin-x-3"
             >{{ playlistLengthMinutes$ | async }} min
             {{ playlistLengthSeconds$ | async }} sec</span

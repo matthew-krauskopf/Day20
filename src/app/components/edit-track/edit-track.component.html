@@ -1,0 +1,47 @@
+<div class="window bg-night pad-x-10 pad-y-10 flex flex-col">
+  <form [formGroup]="form">
+    <div class="flex items-center justify-between margin-bot-10">
+      <span class="bold text-2xl">Edit Details</span>
+      <button mat-icon-button (click)="onNoClick()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="flex flex-row">
+      <div class="pic rounded-lg overflow-hidden">
+        <img src="assets/{{ dialogData.track.id }}.jpg " />
+      </div>
+      <div class="flex flex-col pad-left-7 inputs w-fit">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input class="w-full" matInput formControlName="title" />
+          <mat-error *ngIf="form.controls['title'].errors as error">
+            <span *ngIf="error['required']">Playlist name is required</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Artist</mat-label>
+          <input class="w-full" matInput formControlName="artist" />
+          <mat-error *ngIf="form.controls['artist'].errors as error">
+            <span *ngIf="error['required']">Artist is required</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Album</mat-label>
+          <input class="w-full" matInput formControlName="album" />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <mat-dialog-actions>
+    <div class="pad-top-7 w-full flex justify-end">
+      <button
+        class="rounded"
+        [disabled]="!form.valid"
+        [mat-dialog-close]="form"
+        mat-flat-button
+      >
+        <span class="bold text-m">Save</span>
+      </button>
+    </div></mat-dialog-actions
+  >
+</div>

@@ -16,3 +16,18 @@ export const loadTrack = createAction(
 );
 
 export const unloadTrack = createAction('[Tracks] Unload Track');
+
+export const deleteTrack = createAction(
+  '[Tracks] Delete Track',
+  props<{ trackId: number }>()
+);
+
+export const openEditTrackModal = createAction(
+  '[Tracks] Edit Track',
+  props<{ track: Track }>()
+);
+
+export const updateTrack = createAction(
+  '[Tracks] Update Track',
+  props<{ title: string; artist: string; album: string }>()
+);

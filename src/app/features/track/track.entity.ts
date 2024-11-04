@@ -6,6 +6,7 @@ export interface Track {
   year: number;
   length: number;
 
+  deleted?: boolean;
   type?: string;
   img?: string;
   tracks?: number[];

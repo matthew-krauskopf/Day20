@@ -1,0 +1,26 @@
+.collage {
+  width: 180px;
+  height: 180px;
+}
+
+.window {
+  width: 500px
+}
+
+.inputs {
+  height: 180px;
+  width: 60%;
+}
+
+.mdc-notched-outline__notch
+{
+  border-right: none;
+}
+
+textarea {
+  resize: none;
+}
+
+.rounded {
+  --mdc-filled-button-container-shape: 40px
+}

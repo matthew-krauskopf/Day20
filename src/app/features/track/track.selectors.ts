@@ -1,17 +1,19 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { trackKey, trackState, TrackState } from './track.state';
 import { selectPlaylist } from '../playlist/playlist.selectors';
+import { trackKey, TrackState } from './track.state';
 
 export const selectTrackState = createFeatureSelector<TrackState>(trackKey);
 
 export const selectTracks = createSelector(selectTrackState, (trackState) =>
-  trackState.tracks.map((t) => {
-    return {
-      ...t,
-      type: 'track',
-      img: 'assets/{}.jpg'.replace('{}', String(t.id)),
-    };
-  })
+  trackState.tracks
+    .filter((t) => !t.deleted)
+    .map((t) => {
+      return {
+        ...t,
+        type: 'track',
+        img: 'assets/{}.jpg'.replace('{}', String(t.id)),
+      };
+    })
 );
 
 export const selectedTrack = createSelector(
@@ -30,4 +32,19 @@ export const selectPlaylistLength = createSelector(
   selectPlaylistTracks,
   (tracks) =>
     tracks.map((t) => t.length).reduce((partialSum, a) => partialSum + a, 0)
+);
+
+export const currentTrackLengthMinutes = createSelector(
+  selectedTrack,
+  (track) => (track ? Math.floor(track.length / 60) : 0)
+);
+
+export const currentTrackLengthSeconds = createSelector(
+  selectedTrack,
+  (track) => (track ? track.length % 60 : 0)
+);
+
+export const playlistNumTracks = createSelector(
+  selectPlaylistTracks,
+  (tracks) => (tracks ? tracks.length : 0)
 );

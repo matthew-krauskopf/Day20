@@ -1,6 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadTrack, loadTracksSuccess, unloadTrack } from './track.actions';
+import {
+  deleteTrack,
+  loadTrack,
+  loadTracksSuccess,
+  unloadTrack,
+  updateTrack,
+} from './track.actions';
 import { Track } from './track.entity';
+import { markTrackDeleted, updateTrackInfo } from './track.utils';
 
 export interface TrackState {
   tracks: Track[];
@@ -26,5 +33,19 @@ export const trackReducer = createReducer(
   on(unloadTrack, (state) => ({
     ...state,
     selectedTrack: undefined,
+  })),
+  on(deleteTrack, (state, { trackId }) => ({
+    ...state,
+    tracks: markTrackDeleted(state.tracks, trackId),
+  })),
+  on(updateTrack, (state, { title, artist, album }) => ({
+    ...state,
+    tracks: updateTrackInfo(
+      state.tracks,
+      state.selectedTrack,
+      title,
+      artist,
+      album
+    ),
   }))
 );

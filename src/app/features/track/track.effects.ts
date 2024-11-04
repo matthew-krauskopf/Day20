@@ -1,22 +1,28 @@
 import { inject, Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of, tap } from 'rxjs';
+import { catchError, exhaustMap, filter, map, of, tap } from 'rxjs';
+import { EditTrackComponent } from '../../components/edit-track/edit-track.component';
+import { deleteTrack, updateTrack } from '../track/track.actions';
 import {
   loadTrack,
   loadTracks,
   loadTracksFail,
   loadTracksSuccess,
+  openEditTrackModal,
 } from './track.actions';
 import { Track } from './track.entity';
 import { TrackService } from './track.service';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class TrackEffects {
   router: Router = inject(Router);
   tracksService: TrackService = inject(TrackService);
   snackbar: MatSnackBar = inject(MatSnackBar);
+  dialog: MatDialog = inject(MatDialog);
 
   constructor(private actions$: Actions) {}
 
@@ -58,5 +64,44 @@ export class TrackEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  deleteTrack$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(deleteTrack),
+        map(() => {
+          this.snackbar.open('Track successfully deleted', 'Dismiss', {
+            duration: 3000,
+          });
+          this.router.navigate(['/dashboard']);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  openEditTrackModal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(openEditTrackModal),
+      exhaustMap((payload) =>
+        this.dialog
+          .open(EditTrackComponent, {
+            data: {
+              track: payload.track,
+            },
+          })
+          .afterClosed()
+          .pipe(
+            filter((form) => !!form),
+            map((form: FormGroup) => {
+              return updateTrack({
+                title: form.value.title,
+                artist: form.value.artist,
+                album: form.value.album,
+              });
+            })
+          )
+      )
+    )
   );
 }
