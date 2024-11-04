@@ -28,12 +28,18 @@
       </div>
       <div>
         <button
-          [disabled]="!loginForm.valid"
+          [disabled]="!loginForm.valid || (authFacade.isProcessing$ | async)"
           type="submit"
           class="w-full"
           mat-flat-button
         >
-          <span class="text-white">Submit</span>
+          @if(!(authFacade.isProcessing$ | async)) {
+          <span class="text-white">Submit </span>
+          } @else {
+          <div class="w-7 w-full flex justify-center items-center">
+            <mat-spinner></mat-spinner>
+          </div>
+          }
         </button>
       </div>
     </form>

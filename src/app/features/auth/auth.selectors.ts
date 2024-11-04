@@ -22,3 +22,8 @@ export const selectedItem = createSelector(
     return track ? track : playlist;
   }
 );
+
+export const isProcessing = createSelector(
+  selectAuthState,
+  (authState) => authState.isLoading
+);

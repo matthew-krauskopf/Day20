@@ -11,6 +11,7 @@ import {
 import {
   currentTrackLengthMinutes,
   currentTrackLengthSeconds,
+  isProcessing,
   playlistNumTracks,
   selectedTrack,
   selectPlaylistLength,
@@ -31,6 +32,7 @@ export class TrackFacade {
   currentTrackLengthMinutes$;
   currentTrackLengthSeconds$;
   playlistNumTracks$;
+  isProcessing$;
 
   constructor(private store: Store) {
     this.tracks$ = this.store.select(selectTracks);
@@ -44,6 +46,7 @@ export class TrackFacade {
       currentTrackLengthSeconds
     );
     this.playlistNumTracks$ = this.store.select(playlistNumTracks);
+    this.isProcessing$ = this.store.select(isProcessing);
   }
 
   loadTracks() {

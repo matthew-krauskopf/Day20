@@ -1,5 +1,10 @@
 <div class="bg-grad h-full rounded-lg pad-top-10">
-  @if(playlistFacade.playlist$| async; as playlist) {
+  @if((trackFacade.isProcessing$ | async) || (playlistFacade.isProcessing$ |
+  async)) {
+  <div class="w-full h-full flex justify-center items-center">
+    <mat-spinner></mat-spinner>
+  </div>
+  } @else { @if(playlistFacade.playlist$| async; as playlist) {
   <div class="pad-x-10 h-full flex flex-col overflow-auto">
     <div class="w-full flex justify-end">
       <button
@@ -131,5 +136,5 @@
       </table>
     </div>
   </div>
-  }
+  } }
 </div>

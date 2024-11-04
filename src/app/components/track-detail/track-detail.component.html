@@ -1,5 +1,9 @@
 <div class="bg-grad h-full rounded-lg pad-top-10">
-  @if(trackFacade.selectedTrack$ | async; as track) {
+  @if(trackFacade.isProcessing$ | async) {
+  <div class="w-full h-full flex justify-center items-center">
+    <mat-spinner></mat-spinner>
+  </div>
+  } @else { @if(trackFacade.selectedTrack$ | async; as track) {
   <div class="pad-x-10 h-full flex flex-col overflow-auto">
     <div class="w-full flex justify-end">
       <button
@@ -45,5 +49,5 @@
       </div>
     </div>
   </div>
-  }
+  } }
 </div>

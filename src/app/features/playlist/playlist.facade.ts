@@ -10,6 +10,7 @@ import {
   unloadPlaylist,
 } from './playlist.actions';
 import {
+  isProcessing,
   selectPlaylist,
   selectPlaylistAuthor,
   selectPlaylists,
@@ -23,11 +24,13 @@ export class PlaylistFacade {
   playlists$;
   playlist$;
   playlistAuthor$;
+  isProcessing$;
 
   constructor(private store: Store) {
     this.playlists$ = this.store.select(selectPlaylists);
     this.playlist$ = this.store.select(selectPlaylist);
     this.playlistAuthor$ = this.store.select(selectPlaylistAuthor);
+    this.isProcessing$ = this.store.select(isProcessing);
   }
 
   loadPlaylists() {

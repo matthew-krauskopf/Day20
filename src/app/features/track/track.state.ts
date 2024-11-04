@@ -3,6 +3,7 @@ import {
   addTrack,
   deleteTrack,
   loadTrack,
+  loadTracks,
   loadTracksSuccess,
   unloadTrack,
   updateTrack,
@@ -17,18 +18,29 @@ import {
 export interface TrackState {
   tracks: Track[];
   selectedTrack?: number;
+  isLoading: boolean;
+  isSaving: boolean;
+  isDeleting: boolean;
 }
 
 export const trackState: TrackState = {
   tracks: [],
+  isLoading: false,
+  isSaving: false,
+  isDeleting: false,
 };
 
 export const trackKey = 'track';
 
 export const trackReducer = createReducer(
   trackState,
+  on(loadTracks, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
   on(loadTracksSuccess, (state, { tracks }) => ({
     ...state,
+    isLoading: false,
     tracks: tracks,
   })),
   on(loadTrack, (state, { id }) => ({

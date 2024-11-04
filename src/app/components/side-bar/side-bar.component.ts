@@ -10,6 +10,7 @@ import { Track } from '../../features/track/track.entity';
 import { TrackFacade } from '../../features/track/track.facade';
 import { OptionSelectComponent } from '../option-select/option-select.component';
 import { SideMenuItemComponent } from '../side-menu-item/side-menu-item.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-side-bar',
@@ -19,6 +20,7 @@ import { SideMenuItemComponent } from '../side-menu-item/side-menu-item.componen
     MatIconModule,
     OptionSelectComponent,
     SideMenuItemComponent,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.scss',

@@ -27,3 +27,8 @@ export const selectPlaylistAuthor = createSelector(
   selectPlaylist,
   (users, playlist) => users.find((u) => u.id === playlist?.createdBy)
 );
+
+export const isProcessing = createSelector(
+  selectPlaylistState,
+  (state) => state.isDeleting || state.isLoading || state.isSaving
+);

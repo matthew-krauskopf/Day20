@@ -48,3 +48,8 @@ export const playlistNumTracks = createSelector(
   selectPlaylistTracks,
   (tracks) => (tracks ? tracks.length : 0)
 );
+
+export const isProcessing = createSelector(
+  selectTrackState,
+  (state) => state.isDeleting || state.isLoading || state.isSaving
+);

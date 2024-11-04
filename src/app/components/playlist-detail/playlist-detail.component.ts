@@ -9,6 +9,7 @@ import { TrackFacade } from '../../features/track/track.facade';
 import { TimePipe } from '../../pipes/TimePipe';
 import { CollageComponent } from '../collage/collage.component';
 import { Playlist } from '../../features/playlist/playlist.entity';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-playlist-detail',
@@ -20,6 +21,7 @@ import { Playlist } from '../../features/playlist/playlist.entity';
     TimePipe,
     CollageComponent,
     NgClass,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './playlist-detail.component.html',
   styleUrl: './playlist-detail.component.scss',
