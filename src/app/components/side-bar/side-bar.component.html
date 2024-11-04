@@ -11,9 +11,13 @@
       [mode]="(mode$ | async) ?? undefined"
       (labelEmitter)="selectMode($event)"
     ></app-option-select>
-    } @if(mode$ | async; as mode) { @if(mode == "Playlists") {
+    } @if(mode$ | async; as mode) {
     <div
-      (click)="playlistFacade.addPlaylist(userId)"
+      (click)="
+        mode == 'Playlists'
+          ? playlistFacade.addPlaylist(userId)
+          : trackFacade.addTrack()
+      "
       class="h-full cursor-pointer flex justify-center items-center"
     >
       <span
@@ -22,7 +26,7 @@
         <mat-icon>add</mat-icon>
       </span>
     </div>
-    } @else if (mode == "Tracks") { } }
+    }
   </div>
   <div class="margin-top-10 scroll-pane">
     @for(t of filteredList$ | async; track t) {

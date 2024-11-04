@@ -11,7 +11,7 @@ export const selectTracks = createSelector(selectTrackState, (trackState) =>
       return {
         ...t,
         type: 'track',
-        img: 'assets/{}.jpg'.replace('{}', String(t.id)),
+        img: t.img ?? 'assets/{}.jpg'.replace('{}', String(t.id)),
       };
     })
 );

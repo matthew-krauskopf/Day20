@@ -33,3 +33,15 @@ export function updateTrackInfo(
     },
   ];
 }
+
+export function createNewTrack(tracks: Track[]): Track {
+  return {
+    id: tracks.map((t) => t.id).reduce((max, a) => (max > a ? max : a), 0) + 1,
+    title: 'New Track',
+    artist: 'Unknown Artist',
+    album: 'Unknown Album',
+    year: 2024,
+    length: 0,
+    img: 'assets/new.png',
+  };
+}

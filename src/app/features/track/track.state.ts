@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
+  addTrack,
   deleteTrack,
   loadTrack,
   loadTracksSuccess,
@@ -7,7 +8,11 @@ import {
   updateTrack,
 } from './track.actions';
 import { Track } from './track.entity';
-import { markTrackDeleted, updateTrackInfo } from './track.utils';
+import {
+  createNewTrack,
+  markTrackDeleted,
+  updateTrackInfo,
+} from './track.utils';
 
 export interface TrackState {
   tracks: Track[];
@@ -47,5 +52,9 @@ export const trackReducer = createReducer(
       artist,
       album
     ),
+  })),
+  on(addTrack, (state) => ({
+    ...state,
+    tracks: [...state.tracks, createNewTrack(state.tracks)],
   }))
 );

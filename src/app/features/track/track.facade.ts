@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
+  addTrack,
   deleteTrack,
   loadTrack,
   loadTracks,
@@ -63,5 +64,9 @@ export class TrackFacade {
 
   editTrack(track: Track) {
     this.store.dispatch(openEditTrackModal({ track }));
+  }
+
+  addTrack() {
+    this.store.dispatch(addTrack());
   }
 }

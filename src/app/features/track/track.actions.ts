@@ -17,6 +17,8 @@ export const loadTrack = createAction(
 
 export const unloadTrack = createAction('[Tracks] Unload Track');
 
+export const addTrack = createAction('[Tracks] Add Track');
+
 export const deleteTrack = createAction(
   '[Tracks] Delete Track',
   props<{ trackId: number }>()
