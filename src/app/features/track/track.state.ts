@@ -43,14 +43,15 @@ export const trackReducer = createReducer(
     ...state,
     tracks: markTrackDeleted(state.tracks, trackId),
   })),
-  on(updateTrack, (state, { title, artist, album }) => ({
+  on(updateTrack, (state, { title, artist, album, year }) => ({
     ...state,
     tracks: updateTrackInfo(
       state.tracks,
       state.selectedTrack,
       title,
       artist,
-      album
+      album,
+      year
     ),
   })),
   on(addTrack, (state) => ({

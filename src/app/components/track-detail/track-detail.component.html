@@ -27,9 +27,13 @@
             >{{ track.title }}
           </span>
         </div>
-        <span class="flex items-center text-gray h-5">
-          {{ track.album }}
-        </span>
+        <div class="mt-2 flex flex-row items-center">
+          <span class="flex items-center text-gray h-5">
+            {{ track.album }}
+          </span>
+          <span class="margin-x-3 text-gray">•</span>
+          <span class="text-gray">{{ track.year }} </span>
+        </div>
         <div>
           <span class="">{{ track.artist }}</span>
           <span class="margin-x-3 text-gray">•</span>

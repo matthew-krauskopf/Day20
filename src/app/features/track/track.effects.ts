@@ -98,6 +98,7 @@ export class TrackEffects {
                 title: form.value.title,
                 artist: form.value.artist,
                 album: form.value.album,
+                year: form.value.year,
               });
             })
           )

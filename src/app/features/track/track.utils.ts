@@ -18,7 +18,8 @@ export function updateTrackInfo(
   trackId: number | undefined,
   title: string,
   artist: string,
-  album: string
+  album: string,
+  year: number
 ) {
   const toEditTrack = tracks.find((p) => p.id == trackId);
   if (!toEditTrack) return tracks;
@@ -30,6 +31,7 @@ export function updateTrackInfo(
       title: title,
       artist: artist,
       album: album,
+      year: year,
     },
   ];
 }

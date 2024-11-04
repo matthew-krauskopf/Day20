@@ -29,6 +29,14 @@
           <mat-label>Album</mat-label>
           <input class="w-full" matInput formControlName="album" />
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>Year</mat-label>
+          <input type="number" class="w-full" matInput formControlName="year" />
+          <mat-error *ngIf="form.controls['year'].errors as error">
+            <span *ngIf="error['required']">Year is required</span>
+            <span *ngIf="error['max'] || error['min']">Invalid year</span>
+          </mat-error>
+        </mat-form-field>
       </div>
     </div>
   </form>

@@ -52,14 +52,10 @@ export class EditTrackComponent {
       Validators.required,
     ]),
     album: new FormControl(this.dialogData.track.album),
-    lengthMinutes: new FormControl(
-      Math.floor(this.dialogData.track.length / 60),
-      [Validators.required, Validators.min(0)]
-    ),
-    lengthSeconds: new FormControl(this.dialogData.track.length % 60, [
+    year: new FormControl(this.dialogData.track.year, [
       Validators.required,
-      Validators.min(0),
-      Validators.max(59),
+      Validators.min(1900),
+      Validators.max(new Date().getFullYear()),
     ]),
   });
 

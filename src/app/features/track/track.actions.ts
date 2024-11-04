@@ -31,5 +31,5 @@ export const openEditTrackModal = createAction(
 
 export const updateTrack = createAction(
   '[Tracks] Update Track',
-  props<{ title: string; artist: string; album: string }>()
+  props<{ title: string; artist: string; album: string; year: number }>()
 );
