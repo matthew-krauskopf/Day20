@@ -17,6 +17,7 @@ import {
   selectPlaylistLength,
   selectPlaylistTracks,
   selectTracks,
+  tracksExist,
 } from './track.selectors';
 import { Track } from './track.entity';
 import { loadPlaylists } from '../playlist/playlist.actions';
@@ -33,6 +34,7 @@ export class TrackFacade {
   currentTrackLengthSeconds$;
   playlistNumTracks$;
   isProcessing$;
+  tracksExist$;
 
   constructor(private store: Store) {
     this.tracks$ = this.store.select(selectTracks);
@@ -47,6 +49,7 @@ export class TrackFacade {
     );
     this.playlistNumTracks$ = this.store.select(playlistNumTracks);
     this.isProcessing$ = this.store.select(isProcessing);
+    this.tracksExist$ = this.store.select(tracksExist);
   }
 
   loadTracks() {

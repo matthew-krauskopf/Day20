@@ -74,7 +74,7 @@ export class TrackEffects {
           this.snackbar.open('Track successfully deleted', 'Dismiss', {
             duration: 3000,
           });
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard', 'tracks']);
         })
       ),
     { dispatch: false }

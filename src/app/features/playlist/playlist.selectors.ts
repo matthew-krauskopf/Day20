@@ -16,6 +16,11 @@ export const selectPlaylists = createSelector(
       })
 );
 
+export const playlistsExist = createSelector(
+  selectPlaylists,
+  (playlists) => playlists.length > 0
+);
+
 export const selectPlaylist = createSelector(
   selectPlaylistState,
   selectPlaylists,

@@ -1,3 +1,13 @@
 <div class="h-full bg-side rounded-lg">
-  <span>Here</span>
+  <div class="w-full h-full flex items-center justify-center">
+    @if(playlistFacade.isProcessing$ | async) {
+    <div class="w-full h-full flex justify-center items-center">
+      <mat-spinner></mat-spinner>
+    </div>
+    } @else { @if((playlistFacade.playlistsExist$ | async)) {
+    <span class="text-white text-2xl">Select a playlist</span>
+    } @else {
+    <span class="text-white text-2xl">No playlists found</span>
+    } }
+  </div>
 </div>

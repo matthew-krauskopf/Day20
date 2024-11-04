@@ -1,3 +1,13 @@
 <div class="h-full bg-side rounded-lg">
-  <span>Here</span>
+  <div class="w-full h-full flex items-center justify-center">
+    @if(trackFacade.isProcessing$ | async) {
+    <div class="w-full h-full flex justify-center items-center">
+      <mat-spinner></mat-spinner>
+    </div>
+    } @else { @if((trackFacade.tracksExist$ | async)) {
+    <span class="text-white text-2xl">Select a track</span>
+    } @else {
+    <span class="text-white text-2xl">No tracks found</span>
+    } }
+  </div>
 </div>

@@ -4,6 +4,7 @@ import {
   deleteTrack,
   loadTrack,
   loadTracks,
+  loadTracksFail,
   loadTracksSuccess,
   unloadTrack,
   updateTrack,
@@ -42,6 +43,10 @@ export const trackReducer = createReducer(
     ...state,
     isLoading: false,
     tracks: tracks,
+  })),
+  on(loadTracksFail, (state) => ({
+    ...state,
+    isLoading: false,
   })),
   on(loadTrack, (state, { id }) => ({
     ...state,

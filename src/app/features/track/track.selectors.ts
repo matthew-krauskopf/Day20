@@ -16,6 +16,11 @@ export const selectTracks = createSelector(selectTrackState, (trackState) =>
     })
 );
 
+export const tracksExist = createSelector(
+  selectTracks,
+  (tracks) => tracks.length > 0
+);
+
 export const selectedTrack = createSelector(
   selectTrackState,
   selectTracks,

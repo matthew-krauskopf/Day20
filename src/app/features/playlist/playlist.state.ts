@@ -4,6 +4,7 @@ import {
   deletePlaylist,
   loadPlaylist,
   loadPlaylists,
+  loadPlaylistsFail,
   loadPlaylistsSuccess,
   removeFromPlaylist,
   unloadPlaylist,
@@ -44,6 +45,10 @@ export const playlistReducer = createReducer(
     ...state,
     isLoading: false,
     playlists: playlists,
+  })),
+  on(loadPlaylistsFail, (state) => ({
+    ...state,
+    isLoading: false,
   })),
   on(loadPlaylist, (state, { playlistId }) => ({
     ...state,

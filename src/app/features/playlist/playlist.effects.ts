@@ -92,7 +92,7 @@ export class PlaylistEffects {
           this.snackbar.open('Playlist successfully deleted', 'Dismiss', {
             duration: 3000,
           });
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard', 'playlists']);
         })
       ),
     { dispatch: false }

@@ -9,13 +9,14 @@ import {
   removeFromPlaylist,
   unloadPlaylist,
 } from './playlist.actions';
+import { Playlist } from './playlist.entity';
 import {
   isProcessing,
+  playlistsExist,
   selectPlaylist,
   selectPlaylistAuthor,
   selectPlaylists,
 } from './playlist.selectors';
-import { Playlist } from './playlist.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -25,12 +26,14 @@ export class PlaylistFacade {
   playlist$;
   playlistAuthor$;
   isProcessing$;
+  playlistsExist$;
 
   constructor(private store: Store) {
     this.playlists$ = this.store.select(selectPlaylists);
     this.playlist$ = this.store.select(selectPlaylist);
     this.playlistAuthor$ = this.store.select(selectPlaylistAuthor);
     this.isProcessing$ = this.store.select(isProcessing);
+    this.playlistsExist$ = this.store.select(playlistsExist);
   }
 
   loadPlaylists() {
